@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/usr/local/google/home/mattward/dev/ppg-src/google3/production/config/cdd/youtube/innertube'
+let g:netrw_dirhist_2='/google/src/cloud/mattward/gen-gcl/google3/video/youtube/api/innertube/generated_config'
+let g:netrw_dirhist_3='/google/src/cloud/mattward/presubmit-protos/google3/googledata/apiserving/config/youtube/innertube'
+let g:netrw_dirhist_4='/google/src/cloud/mattward/ytpushczars/google3/production/borg/uberproxy/services/youtube-pushczars'
+let g:netrw_dirhist_5='/google/src/cloud/mattward/cdd-capabilities/google3/production/config/cdd/youtube/innertube'
+let g:netrw_dirhist_6='/usr/local/google/home/mattward/dev/ppg-src/google3/production/config/cdd/youtube/innertube'
+let g:netrw_dirhist_7='/google/src/cloud/mattward/playability-mobile/google3/video/youtube/src/python/servers/innertube'
