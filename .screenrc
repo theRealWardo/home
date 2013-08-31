@@ -1,0 +1,35 @@
+# This is an example for the global screenrc file.
+# You may want to install this file as /etc/screenrc.
+# Check config.h for the exact location.
+#
+# Flaws of termcap and standard settings are done here.
+
+# Don't announce stupid FSF propaganda on startup
+startup_message off
+
+#defflow on # will force screen to process ^S/^Q
+
+#autodetach off
+
+vbell off
+vbell_msg "ding" 
+
+# remove some stupid / dangerous key bindings
+bind ^k
+bind ^\
+# make them better
+bind \\ quit
+bind K kill
+bind } history
+
+# This sets the value of %1` to the output of the command, and refreshes it
+# once per minute.
+backtick 1 60 60 /home/mattward/bin/cert_status.sh loascolorswap #sshcolorswap
+
+shell "-${SHELL}"
+shelltitle -
+hardstatus alwayslastline '%{gk}[ %{G}%H %{g}]%1`[%= %{= kw}%-w%{r}%n:%t%{= kw} %+w%= ][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}'
+#hardstatus string '%{gk}[ %{G}%H %{g}][%= %{= kw}%-w%{r}%n:%t%{= kw} %+w%= ][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}'
+#hardstatus alwayslastline "%{= kr}%-Lw%{=r}%20>%n %t%{= kr}%+Lw %{= kr}%-=| %{= kw}%M%d %c%{-} %{=r} ${USER}@%H "
+caption splitonly "%{= kr}%{=r}%n %t"
+defscrollback 100000
