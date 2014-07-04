@@ -12,7 +12,7 @@ set shiftwidth=2
 set number
 " filepath [modified][buffer][filetype,ro] line,col-virtualcol,byteoffset
 set ls=2
-set statusline=%<%f%=\ %3.3m[%n][%Y%R]\ %{fugitive#statusline()}\ \ %-35(%3l,%c%V\ \ %P\ (%L)%)%10(%b\ 0x%B\ %)
+"set statusline=%<%f%=\ %3.3m[%n][%Y%R]\ %{fugitive#statusline()}\ \ %-35(%3l,%c%V\ \ %P\ (%L)%)%10(%b\ 0x%B\ %)
 "syntax enable
 "set background=dark
 "colorscheme solarized
