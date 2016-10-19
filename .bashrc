@@ -11,10 +11,12 @@ HISTCONTROL=ignoredups:ignorespace
 
 # append to the history file, don't overwrite it
 shopt -s histappend
+# append to history immediately
+export PROMPT_COMMAND="$PROMPT_COMMAND;history -a;history -c;history -r"
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=100000
+HISTFILESIZE=200000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -50,11 +52,44 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
+
+. ~/.bash_colors
+
+function git_color {
+  local git_status="$(git status 2> /dev/null)"
+
+  if [[ $git_status =~ "nothing to commit" ]]; then
+    echo -e $BGreen
+  elif [[ ! $git_status =~ "Untracked files" ]]; then
+    echo -e $BRed
+  elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+    echo -e $BYellow
+  else
+    echo -e $BWhite
+  fi
+}
+
+function git_branch {
+  local git_status="$(git status 2> /dev/null)"
+  local on_branch="On branch ([^${IFS}]*)"
+  local on_commit="HEAD detached at ([^${IFS}]*)"
+
+  if [[ $git_status =~ $on_branch ]]; then
+    local branch=${BASH_REMATCH[1]}
+    echo " ($branch) "
+  elif [[ $git_status =~ $on_commit ]]; then
+    local commit=${BASH_REMATCH[1]}
+    echo " ($commit) "
+  fi
+}
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\[$(git_color)\]$(git_branch)\[\033[00m\]\$ '
+
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
