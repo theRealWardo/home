@@ -12,6 +12,7 @@ set shiftwidth=2
 set number
 " filepath [modified][buffer][filetype,ro] line,col-virtualcol,byteoffset
 set ls=2
+set ts=2
 "set statusline=%<%f%=\ %3.3m[%n][%Y%R]\ %{fugitive#statusline()}\ \ %-35(%3l,%c%V\ \ %P\ (%L)%)%10(%b\ 0x%B\ %)
 "syntax enable
 "set background=dark
@@ -47,6 +48,14 @@ let tlist_actionscript_settings='actionscript;f:function'
 set expandtab
 "match ErrorMsg '\%>80v.\+'
 
+au FileChangedRO * nested :call <SID>CheckOutFile()
+au BufRead,BufNewFile *.hbs set ft=html syntax=handlebars
+
+" Damn it text width autowrapping crap.
+set textwidth=10000000
+
+colorscheme torte
+
 " Some tab key binding thingys
 inoremap <C-t> <Esc>:tabnew<CR>
 noremap <C-t> :tabnew<CR>
@@ -62,33 +71,33 @@ noremap <C-y> <C-w>
 " Plugin key bindings
 inoremap <F12> <Esc>:NERDTreeToggle<CR>
 noremap <F12> :NERDTreeToggle<CR>
+inoremap <C-0> <Esc>:NERDTreeToggle<CR>
+noremap <C-0> :NERDTreeToggle<CR>
 
-au FileChangedRO * nested :call <SID>CheckOutFile()
-au BufRead,BufNewFile *.hbs set ft=html syntax=handlebars
-
-" Damn it text width autowrapping crap.
-set textwidth=10000000
-
-colorscheme torte
+" Golang specific stuff
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
 
 " VUNDLE
 "
 " set the runtime path to include Vundle and initialize
-"
-" Missing Vundle? Just run:
-"   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-"
-" All done? :PluginInstall to get going
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'elixir-lang/vim-elixir'
+"Plugin 'elixir-lang/vim-elixir'
+"Plugin 'slashmili/alchemist.vim'
+Plugin 'larrylv/ycm-elixir'
 Plugin 'fatih/vim-go'
 Plugin 'Lokaltog/vim-powerline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+let g:ycm_filetype_specific_completion_to_disable = {
+      \ 'objc': 1,
+      \ 'cpp': 1
+      \}
