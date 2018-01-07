@@ -24,7 +24,7 @@ bind } history
 
 # This sets the value of %1` to the output of the command, and refreshes it
 # once per minute.
-backtick 1 60 60 /home/mattward/bin/cert_status.sh loascolorswap #sshcolorswap
+# backtick 1 60 60 /home/mattward/bin/cert_status.sh loascolorswap #sshcolorswap
 
 shell "-${SHELL}"
 shelltitle -
