@@ -92,6 +92,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'larrylv/ycm-elixir'
 Plugin 'fatih/vim-go'
 Plugin 'Lokaltog/vim-powerline'
+Plugin 'smerrill/vcl-vim-plugin'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
