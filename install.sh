@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ `go version` = "" ]]; then
+  echo "go is not installed."
+  exit 1
+fi
+
 mv .vim ~/.vim
 mv .vimrc ~/.vimrc
 mv .bashrc ~/.bashrc
